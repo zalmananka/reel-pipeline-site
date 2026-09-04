@@ -1,69 +1,278 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Reel Pipeline — Automated Short-Form Video Creation & Publishing",
+  description:
+    "Transform your content into polished short-form videos and publish directly to Facebook, Instagram, and TikTok through an automated production pipeline.",
+};
+
+const workflowSteps = [
+  {
+    num: "01",
+    title: "Content Selection",
+    desc: "Quotes and content are sourced from your Firebase-managed collection, categorized and ready for video production.",
+  },
+  {
+    num: "02",
+    title: "Video Generation",
+    desc: "The pipeline automatically generates TTS voiceover, selects background video and music, and renders cinematic subtitles.",
+  },
+  {
+    num: "03",
+    title: "Quality Review",
+    desc: "Each reel is validated for technical specifications — resolution, duration, and format compliance before publishing.",
+  },
+  {
+    num: "04",
+    title: "Platform Publishing",
+    desc: "Publish directly to authorized social accounts. Each platform is handled independently with real-time status tracking.",
+  },
+];
+
+const platforms = [
+  {
+    name: "Facebook",
+    status: "Active",
+    statusType: "active" as const,
+    desc: "Reels published via Graph API with chunked video upload.",
+  },
+  {
+    name: "Instagram",
+    status: "Active",
+    statusType: "active" as const,
+    desc: "Reels published via Instagram Graph API for business accounts.",
+  },
+  {
+    name: "TikTok",
+    status: "Pending Review",
+    statusType: "pending" as const,
+    desc: "Content Posting API integrated. Full public publishing pending TikTok App Review approval.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* Hero Section */}
+      <section
+        id="hero"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          paddingTop: "6rem",
+          paddingBottom: "6rem",
+        }}
+      >
+        {/* Background glow */}
+        <div
+          className="glow-spot"
+          style={{
+            width: "600px",
+            height: "600px",
+            background: "var(--accent-primary)",
+            top: "-200px",
+            right: "-100px",
+          }}
+          aria-hidden="true"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div
+          className="glow-spot"
+          style={{
+            width: "400px",
+            height: "400px",
+            background: "var(--accent-tertiary)",
+            bottom: "-100px",
+            left: "-100px",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="container-main" style={{ position: "relative" }}>
+          <div
+            style={{ maxWidth: "720px" }}
+            className="animate-fade-in-up"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="badge badge-accent" style={{ marginBottom: "1.5rem" }}>
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent-primary)" }} />
+              Automated Video Production Pipeline
+            </div>
+
+            <h1 className="heading-xl" style={{ marginBottom: "1.5rem" }}>
+              From content to published reel,{" "}
+              <span className="gradient-text">fully automated.</span>
+            </h1>
+
+            <p className="body-lg" style={{ maxWidth: "580px", marginBottom: "2.5rem" }}>
+              Reel Pipeline transforms your content into polished short-form
+              videos with AI voiceover, cinematic subtitles, and curated visuals
+              — then publishes directly to your social accounts.
+            </p>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+              <Link href="/how-it-works" className="btn-primary" id="cta-how-it-works">
+                See How It Works →
+              </Link>
+              <Link href="/features" className="btn-secondary" id="cta-features">
+                View Features
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Workflow Section */}
+      <section id="workflow" className="section-spacing">
+        <div className="container-main">
+          <div className="animate-fade-in-up" style={{ textAlign: "center", marginBottom: "4rem" }}>
+            <h2 className="heading-lg" style={{ marginBottom: "1rem" }}>
+              The production workflow
+            </h2>
+            <p className="body-lg" style={{ maxWidth: "560px", margin: "0 auto" }}>
+              Every reel follows a consistent, automated pipeline from content to
+              published result.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
+            {workflowSteps.map((step, i) => (
+              <div
+                key={step.num}
+                className={`card animate-fade-in-up delay-${i + 1}`}
+                style={{ position: "relative" }}
+              >
+                <span
+                  style={{
+                    fontSize: "3rem",
+                    fontWeight: 800,
+                    color: "var(--bg-elevated)",
+                    position: "absolute",
+                    top: "1rem",
+                    right: "1.5rem",
+                    lineHeight: 1,
+                    letterSpacing: "-0.05em",
+                  }}
+                  aria-hidden="true"
+                >
+                  {step.num}
+                </span>
+                <div className="step-indicator" style={{ marginBottom: "1.25rem" }}>
+                  {step.num}
+                </div>
+                <h3
+                  className="heading-sm"
+                  style={{ marginBottom: "0.75rem" }}
+                >
+                  {step.title}
+                </h3>
+                <p className="body-md">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Platform Support Section */}
+      <section
+        id="platforms"
+        className="section-spacing"
+        style={{ background: "var(--bg-secondary)" }}
+      >
+        <div className="container-main">
+          <div className="animate-fade-in-up" style={{ textAlign: "center", marginBottom: "4rem" }}>
+            <h2 className="heading-lg" style={{ marginBottom: "1rem" }}>
+              Multi-platform publishing
+            </h2>
+            <p className="body-lg" style={{ maxWidth: "520px", margin: "0 auto" }}>
+              Each platform is handled independently. A failure on one does not
+              block the others.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "1.5rem",
+              maxWidth: "960px",
+              margin: "0 auto",
+            }}
+          >
+            {platforms.map((p, i) => (
+              <div
+                key={p.name}
+                className={`card animate-fade-in-up delay-${i + 1}`}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  <h3 className="heading-sm" style={{ margin: 0 }}>
+                    {p.name}
+                  </h3>
+                  <span
+                    className={`platform-status ${p.statusType === "active" ? "platform-active" : "platform-pending"}`}
+                  >
+                    <span
+                      style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        background: "currentColor",
+                      }}
+                    />
+                    {p.status}
+                  </span>
+                </div>
+                <p className="body-md">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section id="cta-section" className="section-spacing">
+        <div className="container-narrow" style={{ textAlign: "center" }}>
+          <div className="animate-fade-in-up">
+            <h2 className="heading-lg" style={{ marginBottom: "1rem" }}>
+              Ready to automate your reels?
+            </h2>
+            <p
+              className="body-lg"
+              style={{ maxWidth: "480px", margin: "0 auto 2.5rem" }}
+            >
+              Learn about the complete video production workflow and supported
+              platform integrations.
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1rem",
+                justifyContent: "center",
+              }}
+            >
+              <Link href="/about" className="btn-primary" id="cta-about">
+                Learn More
+              </Link>
+              <Link href="/contact" className="btn-secondary" id="cta-contact">
+                Get in Touch
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
