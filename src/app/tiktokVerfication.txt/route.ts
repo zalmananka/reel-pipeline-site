@@ -1,6 +1,6 @@
 export async function GET() {
   return new Response(
-    "Vq9SxPfjCJQ60lP8cv3aEpZQQ6E6soUT", // Sirf signature token string
+    "tiktok-developers-site-verification=bDPHRBdQnRQOCsgFdqCf2ODowRf59ynV", // Sirf signature token string
     {
       status: 200,
       headers: {
