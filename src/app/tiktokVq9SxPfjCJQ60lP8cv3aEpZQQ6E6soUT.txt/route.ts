@@ -1,6 +1,6 @@
 export async function GET() {
   return new Response(
-    "tiktok2f476ZZ96jmpyvVTUWZYgjMdeevnNa1v", // Sirf signature token string
+    "Vq9SxPfjCJQ60lP8cv3aEpZQQ6E6soUT", // Sirf signature token string
     {
       status: 200,
       headers: {
