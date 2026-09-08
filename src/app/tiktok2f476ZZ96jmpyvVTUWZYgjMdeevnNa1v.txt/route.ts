@@ -1,6 +1,6 @@
 export async function GET() {
   return new Response(
-    "tiktok-developers-site-verification=B64J8hGEM3pnox8tao983wWFgvB0NNN5",
+    "tiktok-developers-site-verification=tiktok2f476ZZ96jmpyvVTUWZYgjMdeevnNa1v",
     {
       status: 200,
       headers: {
